@@ -5,6 +5,7 @@ class API {
   final Dio dio = Dio();
   CancelToken cancelToken = CancelToken();
 
+  // Converts messages to a format suitable for the API
   List<Map<String, dynamic>> convertToConversation(List<Message> messages) {
     return messages.map((message) {
       return {
@@ -21,15 +22,15 @@ class API {
     cancelToken = CancelToken();
   }
 
+  // TODO: Replace with your own API endpoint and request logic
   Future<String?> getResponse(String prompt, List<Message> messages) async {
-    try
-    {
+    try {
       final response = await dio.post(
-          'https://chatbot.brainyte.com/',
+          'https://your-api-endpoint.com', // Replace this URL with your API
           data: {
             'conversation': convertToConversation(messages),
             'prompt': prompt,
-            'model': 'gpt-3.5',
+            'model': 'YOUR_MODEL_HERE', // Replace with your AI model if needed
           },
           cancelToken: cancelToken,
           options: Options(
